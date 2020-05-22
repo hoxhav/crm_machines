@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+Header append X-FRAME-OPTIONS "SAMEORIGIN"
+Header set X-Content-Type-Options nosniff
+Header always set X-XSS-Protection "1; mode=block"
+#Header unset x-powered-by htaccess
+
+</IfModule>
