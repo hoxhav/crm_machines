@@ -52,6 +52,8 @@
 						if (data.length > 0) {
 							window.location = domain;
 						}
+					} else {
+						//TODO: Swal fire error no user
 					}
 				}
 			});

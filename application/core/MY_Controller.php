@@ -11,9 +11,8 @@ class MY_Controller extends CI_Controller
         $this->data['js_ar'] = array();
 		$this->data['fonts_ar'] = array();
 		$this->data['version'] = '1.0.0';
-		$this->data['title'] = "Welcome to Medic Panels";
+		$this->data['title'] = "Welcome to CRM";
 
-		$this->output->set_header("Set-Cookie: key=value; path=/; domain=localhost; HttpOnly; SameSite=strict");
 		$this->output->set_header('X-Frame-Options: DENY');
 		$this->output->set_header('X-Content-Type-Options: nosniff');
 		$this->output->set_header("X-XSS-Protection: 1; mode=block");
@@ -30,9 +29,10 @@ class MY_Controller extends CI_Controller
 			$c = json_decode(get_cookie('session'), true);
 			$this->load->model("M_Login");
 			$res = $this->M_Login->getUserDataById($c['u_d']);
-			$this->data['profile_name'] = $res[0]->name;
-			$this->data['profile_mail'] = $res[0]->email;
-			$this->data['profile_id'] = $res[0]->id;
+			$this->data['profile_name'] = $res[0]['first_name'] . ' '. $res[0]['last_name'];
+			$this->data['profile_mail'] = $res[0]['email'];
+			$this->data['profile_id'] = $res[0]['id'];
+			$this->data['user_role'] = $res[0]['role_name'];
 		}
 	}
 
@@ -54,10 +54,9 @@ class MY_Controller extends CI_Controller
 		array_push($this->data['js_ar'], "popper/popper.min.js");
 		array_push($this->data['js_ar'], "Bootstrap/bootstrap.min.js");
 		array_push($this->data['js_ar'], "select2/select2.min.js");
-		array_push($this->data['js_ar'], "daterangepicker/daterangepicker.js");
 		array_push($this->data['js_ar'], "moment/moment.min.js");
 		array_push($this->data['js_ar'], "sweetalert2/sweetalert2.all.min.js");
-		array_push($this->data['js_ar'], "countdowntime/countdowntime.js");
+		array_push($this->data['js_ar'], "mdb/mdb.min.js");
 		array_push($this->data['js_ar'], "custom/custom.js");
 
 
@@ -71,7 +70,8 @@ class MY_Controller extends CI_Controller
 		array_push($this->data['css_ar'], "animsition/animsition.min.css");
 		array_push($this->data['css_ar'], "sweetalert2/sweetalert2.min.css");
 		array_push($this->data['css_ar'], "select2/select2.min.css");
-		array_push($this->data['css_ar'], "daterangepicker/daterangepicker.css");
+		array_push($this->data['css_ar'], "mdb/mdb.min.css");
+
 		array_push($this->data['css_ar'], "custom/main.css");
 		array_push($this->data['css_ar'], "custom/custom.css");
     }
@@ -94,13 +94,13 @@ class My_login_Controller extends MY_Controller
 }
 
 
-class MY_patient_Controller extends MY_Controller
+class MY_dashbaord_Controller extends MY_Controller
 {
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->data['title'] = "Patients queries";
+		$this->data['title'] = "Dashboard";
 		$this->checkUser();
 	}
 }

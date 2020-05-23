@@ -12,7 +12,7 @@ class C_Login extends MY_Controller
 	public function index()
 	{
 		if (isset($_COOKIE['session'])) {
-			redirect('patient_list');
+			redirect('dashboard');
 		}
 
 		if ($this->input->method() !== 'post') {
@@ -29,11 +29,11 @@ class C_Login extends MY_Controller
 			$pw  = hash("sha512", $p);
 			$u_data = $this->M_Login->getUserData($u,$pw);
 			if (sizeof($u_data) == 1) {
-				$u_id = $u_data[0]->id;
-				$cookie_data["session"] = $this->generateSession($u_data[0]);
+				$u_id = $u_data[0]['id'];
+				$cookie_data["session"] = $this->generateSession($u_data);
 				$cookie_data["u_d"] = $u_id;
 				set_cookie("session", json_encode($cookie_data), 60 * 60 * 24 * 365);
-				redirect('patient_list');
+				redirect('dashboard');
 
 			} else {
 				echo 0;
@@ -44,17 +44,7 @@ class C_Login extends MY_Controller
 
 	private function generateSession($u_data)
 	{
-		return hash("sha512", $u_data->id . $u_data->username . $u_data->email . time());
+		return hash("sha512", $u_data[0]['id'] . $u_data[0]['username'] . $u_data[0]['email'] . time());
 	}
 
-	/*public function register() {
-		redirect("survey_vjori/signup");
-	}*/
-
-	public function signup() {
-		$this->data['container'] = $this->load->view('login/containers/signup', null, true);
-		$this->data['navigation'] = '';
-		array_push($this->data['js_ar'], "custom/signup.js");
-		$this->load->view('main-frame', $this->data);
-	}
 }

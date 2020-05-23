@@ -17,3 +17,19 @@ $(document).on('click', '.addRecord', function () {
 	window.location = domain + 'survey/add_record/' + user_id;
 
 });
+
+$(document).on('click', '#logout', function () {
+	$.ajax({
+		url: domain + 'ajax/dashboard/logout',
+		beforeSend: function () {
+			n_loader = -1;
+		},
+		success: function (data) {
+				if(data == 0) {
+					n_loader = 1;
+					window.location = domain;
+				}
+		}
+	});
+
+});

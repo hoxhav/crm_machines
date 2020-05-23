@@ -49,11 +49,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'C_Patient_List';
+$route['default_controller'] = 'C_Dashboard';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['patient_list'] = 'C_Patient_List';
+$route['dashboard'] = 'C_Dashboard';
 $route['survey'] = 'C_Survey';
 $route['panels_list'] = 'C_Panels';
 $route['labels_list'] = 'C_Labels';
@@ -64,10 +64,6 @@ $route['login/(:any)/(:any)'] = 'C_Login/login/$1/$2';
 
 $route['ajax/signupUser'] = 'C_Login_Ajax/registerUser';
 $route['ajax/login_ajax/(:any)'] = 'C_Login_Ajax/$1';
-
-
-/* EXCEL export */
-$route['excel/(:any)/(:any)'] = 'C_Export_Excel_ajax/$1/$2';
 
 
 /*Survey*/
@@ -89,11 +85,11 @@ $route['ajax/statistics/(:any)/(:any)'] = 'C_Statistics_Ajax/$1/$2';
 /*End of stats*/
 
 
-/*Patient*/
-$route['patient_list/(:any)'] = 'C_Patient_List/$1';
+/*Dashboard*/
+$route['dashboard/(:any)'] = 'C_Dashboard/$1';
 
-$route['ajax/patient_list/(:any)'] = 'C_Patient_List_Ajax/$1';
-$route['ajax/patient_list/(:any)/(:any)'] = 'C_Patient_List_Ajax/$1/$2';
+$route['ajax/dashboard/(:any)'] = 'C_Dashboard_Ajax/$1';
+$route['ajax/dashboard/(:any)/(:any)'] = 'C_Dashboard_Ajax/$1/$2';
 /*End of patient*/
 
 // Panels
