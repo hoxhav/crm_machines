@@ -33,3 +33,18 @@ $(document).on('click', '#logout', function () {
 	});
 
 });
+
+function getMachineTableTemplate(data) {
+	return '\t<thead>\n' +
+		'\t\t\t\t\t<tr>\n' +
+		'\t\t\t\t\t\t<th scope="col">Date Entered</th>\n' +
+		'\t\t\t\t\t\t<th scope="col">Machine Code</th>\n' +
+		'\t\t\t\t\t\t<th scope="col">Serial Number</th>\n' +
+		'\t\t\t\t\t\t<th scope="col">Price</th>\n' +
+		'\t\t\t\t\t\t<th scope="col">Description</th>\n' +
+		'\t\t\t\t\t</tr>\n' +
+		'\t\t\t\t\t</thead>\n' +
+		'\t\t\t\t\t<tbody>\n' +
+		data+
+		'\t\t\t\t\t</tbody>';
+}

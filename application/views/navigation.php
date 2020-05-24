@@ -14,7 +14,13 @@
 			<?php if($user_role === 'administrator') {
 				echo "<li class='nav-item active'>
 				<a class='nav-item nav-link active' href='" .base_url('administration'). "'>ADMINISTRATION <span class='sr-only'>(current)</span></a>
-			</li>";
+			</li>
+			
+			<li class='ml-3 nav-item active'>
+				<a id='add-operator' class='nav-item nav-link '>ADD OPERATOR</a>
+			</li>
+			
+			";
 
 			}?>
 		</ul>
