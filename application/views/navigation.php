@@ -5,9 +5,18 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbarText">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active">
-				<a class="nav-item nav-link active" href="<?php echo base_url("dashboard") ?>">Home <span class="sr-only">(current)</span></a>
-			</li>
+			<?php if($user_role === 'operator') {
+				echo "<li class='nav-item active'>
+				<a class='nav-item nav-link active' href='" . base_url('dashboard') . "'>DASHBOARD <span class='sr-only'>(current)</span></a>
+			</li>";
+			}?>
+
+			<?php if($user_role === 'administrator') {
+				echo "<li class='nav-item active'>
+				<a class='nav-item nav-link active' href='" .base_url('administration'). "'>ADMINISTRATION <span class='sr-only'>(current)</span></a>
+			</li>";
+
+			}?>
 		</ul>
 		<span class="navbar-text">Welcome, <?php echo $profile_name;?> </span>
 		<button style="margin-left: 10px;" class="btn btn-danger" id="logout">Logout</button>

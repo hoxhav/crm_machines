@@ -12,7 +12,14 @@ class C_Login extends MY_Controller
 	public function index()
 	{
 		if (isset($_COOKIE['session'])) {
-			redirect('dashboard');
+			$c = json_decode(get_cookie('session'), true);
+			$this->load->model("M_Login");
+			$res = $this->M_Login->getUserDataById($c['u_d']);
+			if($res[0]['role_name'] == 'operator') {
+				redirect('dashboard');
+			} else {
+				redirect('administration');
+			}
 		}
 
 		if ($this->input->method() !== 'post') {
@@ -33,7 +40,7 @@ class C_Login extends MY_Controller
 				$cookie_data["session"] = $this->generateSession($u_data);
 				$cookie_data["u_d"] = $u_id;
 				set_cookie("session", json_encode($cookie_data), 60 * 60 * 24 * 365);
-				redirect('dashboard');
+				redirect('redirecting');
 
 			} else {
 				echo 0;

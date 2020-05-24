@@ -93,58 +93,39 @@ class MY_dashbaord_Controller extends MY_Controller
 	{
 		parent::__construct();
 		$this->data['title'] = "Dashboard";
+		//$this->checkPrivileges();
 		$this->checkUser();
+	}
+
+	protected function checkPrivileges() {
+		$c = json_decode(get_cookie('session'), true);
+		$this->load->model("M_Login");
+		$res = $this->M_Login->getUserDataById($c['u_d']);
+		if($res[0]['role_name'] === 'operator'){
+			redirect('administration');
+		}
 	}
 }
 
 
-class MY_survey_controller extends MY_Controller
+class MY_administration_Controller extends MY_Controller
 {
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->data['title'] = "Medic Panel Insertion";
+		$this->data['title'] = "Administration";
 		$this->checkUser();
 	}
 }
 
-class MY_panel_controller extends MY_Controller
+class MY_privileges_Controller extends MY_Controller
 {
-	public function __construct()
-	{
-		parent::__construct();
-		$this->data['title'] = "Panels";
-		$this->checkUser();
-	}
-}
 
-class MY_label_controller extends MY_Controller
-{
 	public function __construct()
 	{
 		parent::__construct();
-		$this->data['title'] = "Labels";
-		$this->checkUser();
-	}
-}
-
-class MY_question_controller extends MY_Controller
-{
-	public function __construct()
-	{
-		parent::__construct();
-		$this->data['title'] = "Questions";
-		$this->checkUser();
-	}
-}
-
-class MY_statistics_controller extends MY_Controller
-{
-	public function __construct()
-	{
-		parent::__construct();
-		$this->data['title'] = "Statistics";
+		$this->data['title'] = "Redirecting...";
 		$this->checkUser();
 	}
 }

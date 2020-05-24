@@ -8,6 +8,10 @@
 
 		public function index()
 		{
+			if($this->data['user_role'] == 'administrator') {
+				redirect('administration');
+			}
+
 			$this->data['container'] = $this->load->view('dashboard/containers/dashboard',  $this->data, true);
 			$this->data['navigation'] = $this->load->view('navigation',  $this->data, true);
 			array_push($this->data['js_ar'], "custom/dashboard.js");

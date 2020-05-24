@@ -49,15 +49,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'C_Dashboard';
+$route['default_controller'] = 'C_Privileges';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['redirecting'] = 'C_Privileges';
+
 $route['dashboard'] = 'C_Dashboard';
-$route['survey'] = 'C_Survey';
-$route['panels_list'] = 'C_Panels';
-$route['labels_list'] = 'C_Labels';
-$route['statistics'] = 'C_Statistics';
+$route['administration'] = 'C_Administration';
 $route['login'] = 'C_Login';
 $route['(:any)'] = 'C_Login/$1';
 $route['login/(:any)/(:any)'] = 'C_Login/login/$1/$2';
@@ -72,4 +71,12 @@ $route['dashboard/(:any)'] = 'C_Dashboard/$1';
 
 $route['ajax/dashboard/(:any)'] = 'C_Dashboard_Ajax/$1';
 $route['ajax/dashboard/(:any)/(:any)'] = 'C_Dashboard_Ajax/$1/$2';
-/*End of patient*/
+/*End of dashboard*/
+
+/*Administration*/
+$route['administration/(:any)'] = 'C_Administration/$1';
+
+$route['ajax/administration/(:any)'] = 'C_Administration_Ajax/$1';
+$route['ajax/administration/(:any)/(:any)'] = 'C_Administration_Ajax/$1/$2';
+/*End of administration*/
+
