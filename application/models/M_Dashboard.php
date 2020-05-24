@@ -12,6 +12,15 @@ class M_Dashboard extends MY_Model {
 		return $this->getQueryResultArray("call sp_get_avilable_machines()");
 	}
 
+	public function sellMachineAppendData($machine_id) {
+		return $this->getQueryResultArray("call sp_get_serial_num_for_machine_sell('$machine_id')");
+	}
+
+	public function sellMachine($machine_id, $client_id) {
+		$this->db->query("call sp_sell_machine_to_client('$machine_id', '$client_id')");
+		return "success";
+	}
+
 	public function deactivateMachine($machine_id) {
 		$this->db->query("call sp_deactivate_machine('$machine_id')");
 		return "success";

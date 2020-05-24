@@ -6,7 +6,7 @@
 					<h5 class="card-title">Available Machines</h5>
 				</div>
 				<div class="card-body">
-					<h3 class="card-title">4</h3>
+					<h3 id="avail-machine-num" class="card-title"></h3>
 				</div>
 			</div>
 		</div>
@@ -19,7 +19,7 @@
 					<h5 class="card-title">Number of Sales</h5>
 				</div>
 				<div class="card-body">
-					<h3 class="card-title">3</h3>
+					<h3 id="num-of-sales-num" class="card-title"></h3>
 				</div>
 			</div>
 		</div>
@@ -32,7 +32,7 @@
 					<h5 class="card-title">Unavailable Machines</h5>
 				</div>
 				<div class="card-body">
-					<h3 class="card-title">2</h3>
+					<h3 id="unavail-machines-num" class="card-title"></h3>
 				</div>
 			</div>
 		</div>
@@ -116,6 +116,35 @@
 				<table id="modify-client-table" class="table">
 
 				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal" id="sell-machine-modal" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Sell Machine with serial num <span id="serial-num-sell-machine"></span> and id <span id="id-sell-machine-span"></span></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form id="sell-machine-form" method="POST" >
+					<div class="form-group">
+						<label for="client_sell_machine">Client:</label>
+						<select class="form-control" name="client_sell_machine" id="client_sell_machine">
+							<option value="-1"></option>
+						</select>
+					</div>
+
+					<div style="float: right !important;" id="buttons_sell_machines">
+						<button type="submit" id="submit_sell_machine" class="btn btn-primary">Submit</button>
+						<button type="reset" id="clear_sell_machine" class="btn btn-secondary">Clear</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

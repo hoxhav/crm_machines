@@ -36,11 +36,30 @@ class C_Dashboard_Ajax extends MY_Controller {
 	}
 
 	public function getAvailableMachines() {
-		echo json_encode($this->M_Dashboard->getAvailMachines());
+		echo json_encode(array(
+				"machine_data"=>$this->M_Dashboard->getAvailMachines(),
+				"avail_machines" => $this->getQueryResultArray("	SELECT COUNT(available) AS 'avail_machines' FROM gbfyzzmy_machine.machines WHERE available = 1;"),
+				"unavail_machines" => $this->getQueryResultArray("   SELECT COUNT(available) AS 'unavail_machines' FROM gbfyzzmy_machine.machines WHERE available = 0;"),
+				"total_sale" => $this->getQueryResultArray(" SELECT COUNT(id) AS 'total_sales' FROM gbfyzzmy_machine.clients_has_machines;")
+			)
+		);
 	}
 
 	public function deactivateMachine($machine_id) {
 		echo json_encode($this->M_Dashboard->deactivateMachine($machine_id));
+	}
+
+	public function sellMachine() {
+		echo json_encode($this->M_Dashboard->sellMachine($this->input->post("machine_id"), $this->input->post("client_id")));
+
+	}
+
+	public function sellMachineAppendData($machine_id) {
+		echo json_encode(array(
+			"serial_number" => $this->M_Dashboard->sellMachineAppendData($machine_id),
+			"clients" => $this->getQueryResultArray("SELECT * FROM gbfyzzmy_machine.clients;")
+		));
+
 	}
 
 	public function addMachine() {

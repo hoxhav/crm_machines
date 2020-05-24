@@ -5,10 +5,19 @@ $(document).ready(function() {
 			n_loader = -1;
 		},
 		success: function (d) {
-			var machine_data = JSON.parse(d);
+			var data = JSON.parse(d);
 			var result = '';
-			for (let i = 0; i < machine_data.length; i++) {
-				result += getItemTemplate( machine_data[i].quantity_avail,machine_data[i].picture_path,  machine_data[i].id);
+			var machines_data = data.machine_data;
+			var available_machines = data.avail_machines[0].avail_machines;
+			var unavailable_machines = data.unavail_machines[0].unavail_machines;
+			var sales = data.total_sale[0].total_sales;
+
+			$("#avail-machine-num").text(available_machines);
+			$("#num-of-sales-num").text(sales);
+			$("#unavail-machines-num").text(unavailable_machines);
+
+			for (let i = 0; i < machines_data.length; i++) {
+				result += getItemTemplate( machines_data[i].quantity_avail,machines_data[i].picture_path,  machines_data[i].id);
 			}
 
 			$("#machine-grid").append(result);
@@ -225,6 +234,86 @@ $(document).on('click', '.delete-client', function () {
 });
 
 
+// sell machine section
+
+
+$(document).on('click', '.sell_machine', function () {
+	let machine_id_sell = $(this).attr('name');
+	$("#serial-num-sell-machine").text('');
+	$("#id-sell-machine-span").text('');
+	$.ajax({
+		url: domain + "ajax/dashboard/sellMachineAppendData/" + machine_id_sell,
+		type: 'post',
+		beforeSend: function () {
+			n_loader = -1;
+		},
+		success: function (d) {
+			var sell_client_data = null;
+			try {
+				sell_client_data = JSON.parse(d);
+				$("#serial-num-sell-machine").append(sell_client_data.serial_number[0].serial_number);
+				$("#id-sell-machine-span").append(machine_id_sell);
+
+				let client = sell_client_data.clients;
+				let res = '';
+				for(let i = 0; i < client.length; i++) {
+					res += '<option value="'+client[i].id+'">'+client[i].company_name+'</option>';
+				}
+				$("#client_sell_machine").append(res);
+			}catch(e) {
+			}
+		},
+		complete: function () {
+			n_loader = 1;
+			$("#sell-machine-modal").modal();
+		}
+	});
+
+
+
+});
+
+$("#sell-machine-form").submit(function (e) {
+	e.preventDefault();
+	$.ajax({
+		url: domain + "ajax/dashboard/sellMachine" ,
+		type: 'post',
+		data: {"machine_id":$("#id-sell-machine-span").text(), "client_id": $('#client_sell_machine option:selected').val()},
+		beforeSend: function () {
+			n_loader = -1;
+		},
+		success: function (d) {
+			var sell_machine = null;
+			try {
+				sell_machine = JSON.parse(d);
+				if(sell_machine == "success") {
+					Swal.fire({
+						icon: 'success',
+						title: 'This machine has been sold.',
+						showConfirmButton: false,
+						timer: 3000
+					});
+				} else {
+					Swal.fire({
+						icon: 'error',
+						title: 'Something went wrong.',
+						showConfirmButton: false,
+						timer: 3000
+					});
+				}
+			}catch(e) {
+			}
+		},
+		complete: function () {
+			n_loader = 1;
+			window.location = domain;
+		}
+	});
+
+});
+
+//end sell machine section
+
 $(document).on('click', '.edit-client', function () {
 	let client_id_edit = $(this).attr('name');
 	$("#modify-clients-modal").modal("hide");
@@ -265,8 +354,6 @@ $("#edit-client-form").submit(function (e) {
 					});
 				}
 			}catch(e) {
-				//TODO: Some logger solution
-
 			}
 		},
 		complete: function () {
@@ -365,8 +452,6 @@ $("#add-client-form").submit(function (e) {
 					});
 				}
 			}catch(e) {
-				//TODO: Some logger solution
-
 			}
 		},
 		complete: function () {
