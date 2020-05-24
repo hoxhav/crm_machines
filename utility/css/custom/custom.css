@@ -23,3 +23,12 @@ body{
 #machine-grid {
 	width: 100%;
 }
+
+
+.machine-items {
+	background-color: #7abecc;
+}
+
+.avail-machines-bck {
+	background-color: #648b96;
+}

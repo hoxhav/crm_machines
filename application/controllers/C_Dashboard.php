@@ -10,9 +10,6 @@
 		{
 			$this->data['container'] = $this->load->view('dashboard/containers/dashboard',  $this->data, true);
 			$this->data['navigation'] = $this->load->view('navigation',  $this->data, true);
-
-			array_push($this->data['css_ar'], "DataTables/datatables.css");
-			array_push($this->data['js_ar'], "DataTables/datatables.js");
 			array_push($this->data['js_ar'], "custom/dashboard.js");
 			$this->load->view('main-frame', $this->data);
 		}

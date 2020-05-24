@@ -66,24 +66,6 @@ $route['ajax/signupUser'] = 'C_Login_Ajax/registerUser';
 $route['ajax/login_ajax/(:any)'] = 'C_Login_Ajax/$1';
 
 
-/*Survey*/
-$route['survey/(:any)'] = 'C_Survey/$1';
-$route['survey/(:any)/(:any)'] = 'C_Survey/$1/$2';
-
-$route['ajax/survey/(:any)'] = 'C_Survey_Ajax/$1';
-$route['ajax/survey/(:any)/(:any)'] = 'C_Survey_Ajax/$1/$2';
-
-/*End of Survey*/
-
-/*Statistics*/
-$route['statistics/(:any)'] = 'C_Statistics/$1';
-$route['statistics/(:any)/(:any)'] = 'C_Statistics/$1/$2';
-
-$route['ajax/statistics/(:any)'] = 'C_Statistics_Ajax/$1';
-$route['ajax/statistics/(:any)/(:any)'] = 'C_Statistics_Ajax/$1/$2';
-
-/*End of stats*/
-
 
 /*Dashboard*/
 $route['dashboard/(:any)'] = 'C_Dashboard/$1';
@@ -91,40 +73,3 @@ $route['dashboard/(:any)'] = 'C_Dashboard/$1';
 $route['ajax/dashboard/(:any)'] = 'C_Dashboard_Ajax/$1';
 $route['ajax/dashboard/(:any)/(:any)'] = 'C_Dashboard_Ajax/$1/$2';
 /*End of patient*/
-
-// Panels
-$route['panels_list/(:any)'] = 'C_Panels/$1';
-$route['panels_list/(:any)/(:any)'] = 'C_Panels/$1/$2';
-
-
-$route['ajax/panels/(:any)'] = 'C_Panels_Ajax/$1';
-$route['ajax/panels_list/(:any)'] = 'C_Panels_Ajax/$1';
-$route['ajax/panels_list/(:any)/(:any)'] = 'C_Panels_Ajax/$1/$2';
-
-// End of panels
-
-// Labels
-$route['labels_list/(:any)'] = 'C_Labels/$1';
-$route['labels_list/(:any)/(:any)'] = 'C_Labels/$1/$2';
-
-
-$route['ajax/labels/(:any)/(:any)'] = 'C_Labels_Ajax/$1/$2';
-$route['ajax/labels_list/(:any)'] = 'C_Labels_Ajax/$1';
-$route['ajax/labels_list/(:any)/(:any)'] = 'C_Labels_Ajax/$1/$2';
-// End of labels
-
-
-// Questions
-$route['questions_list/(:any)'] = 'C_Questions';
-$route['questions_list/(:any)/(:any)'] = 'C_Questions/$1/$2';
-$route['questions_list/questions_list/(:any)/(:any)'] = 'C_Questions/$1/$2';
-
-$route['ajax/questions_list/(:any)'] = 'C_Questions_Ajax/$1';
-$route['ajax/questions_list/(:any)/(:any)'] = 'C_Questions_Ajax/$1/$2';
-// End of questions
-
-// Answers
-
-$route['ajax/answers_list/(:any)/(:any)'] = "C_Answers_Ajax/$1/$2";
-$route['ajax/answers_list/(:any)'] = "C_Answers_Ajax/$1";
-// End of answers

@@ -39,7 +39,16 @@ foreach ($js_ar as $js) {
 
 </body>
 
-<footer class="footer">
+<!-- Footer -->
+<footer class="page-footer font-small black mt-5">
+
+	<!-- Copyright -->
+	<div class="footer-copyright text-center py-3">© 2020 Copyright:
+		<a href="https://vjorihoxha.com"> vjorihoxha.com</a>
+	</div>
+	<!-- Copyright -->
+
 </footer>
+<!-- Footer -->
 
 </html>

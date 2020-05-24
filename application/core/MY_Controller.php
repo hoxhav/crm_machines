@@ -50,11 +50,8 @@ class MY_Controller extends CI_Controller
     {
         /*         * ******** JS ********* */
         array_push($this->data['js_ar'], "JQuery/jquery-3.4.1.min.js");
-		array_push($this->data['js_ar'], "animsition/animsition.min.js");
 		array_push($this->data['js_ar'], "popper/popper.min.js");
 		array_push($this->data['js_ar'], "Bootstrap/bootstrap.min.js");
-		array_push($this->data['js_ar'], "select2/select2.min.js");
-		array_push($this->data['js_ar'], "moment/moment.min.js");
 		array_push($this->data['js_ar'], "sweetalert2/sweetalert2.all.min.js");
 		array_push($this->data['js_ar'], "mdb/mdb.min.js");
 		array_push($this->data['js_ar'], "custom/custom.js");
@@ -65,13 +62,8 @@ class MY_Controller extends CI_Controller
 		array_push($this->data['fonts_ar'], "font-awesome-4.7.0/css/font-awesome.min.css");
 		array_push($this->data['fonts_ar'], "Linearicons-Free-v1.0.0/icon-font.min.css");
 		array_push($this->data['fonts_ar'], "iconic/css/material-design-iconic-font.min.css");
-		array_push($this->data['css_ar'], "animate/animate.css");
-		array_push($this->data['css_ar'], "css-hamburgers/hamburgers.min.css");
-		array_push($this->data['css_ar'], "animsition/animsition.min.css");
 		array_push($this->data['css_ar'], "sweetalert2/sweetalert2.min.css");
-		array_push($this->data['css_ar'], "select2/select2.min.css");
 		array_push($this->data['css_ar'], "mdb/mdb.min.css");
-
 		array_push($this->data['css_ar'], "custom/main.css");
 		array_push($this->data['css_ar'], "custom/custom.css");
     }

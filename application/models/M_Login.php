@@ -9,4 +9,3 @@ class M_Login extends MY_Model {
 		return $this->getQueryResultArray("CALL sp_get_user_by_id('$id');");
 	}
 }
-
