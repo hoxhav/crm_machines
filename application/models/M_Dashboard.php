@@ -21,6 +21,11 @@ class M_Dashboard extends MY_Model {
 		return "success";
 	}
 
+	public function getMachineInfo($machine_id){
+		return $this->getQueryResultArray("call sp_get_machine_for_edit('$machine_id')");
+
+	}
+
 	public function deactivateMachine($machine_id) {
 		$this->db->query("call sp_deactivate_machine('$machine_id')");
 		return "success";

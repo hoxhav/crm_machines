@@ -45,6 +45,11 @@ class C_Dashboard_Ajax extends MY_Controller {
 		);
 	}
 
+	public function getMachineInfo($machine_id) {
+		echo json_encode($this->M_Dashboard->getMachineInfo($machine_id));
+
+	}
+
 	public function deactivateMachine($machine_id) {
 		echo json_encode($this->M_Dashboard->deactivateMachine($machine_id));
 	}

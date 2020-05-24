@@ -33,6 +33,7 @@ function getItemTemplate(quantity_avail,picture_path,id) {
 		'\t\t<div class="card text-center text-white machine-items">\n' +
 		'\t\t\t<div class="card-header">\n' +
 		'\t\t\t\t<h5 class="card-title">Available quantity - ' + quantity_avail+'</h5>\n' +
+		'\t\t\t\t\t\t\t<button name="' + id+'" class="btn btn-info info_machine">Info</button>\n' +
 		'\t\t\t</div>\n' +
 		'\t\t\t<div class="card-body pb-4">\n' +
 		'\t\t\t\t<div class="view overlay">\n' +
@@ -314,6 +315,45 @@ $("#sell-machine-form").submit(function (e) {
 
 //end sell machine section
 
+// info machine section //
+
+$(document).on('click', '.info_machine', function () {
+	let machine_id = $(this).attr('name');
+
+	$.ajax({
+		url: domain + "ajax/dashboard/getMachineInfo/" + machine_id,
+		beforeSend: function () {
+			n_loader = -1;
+			$("#info-machine-table").empty();
+		},
+		success: function (d) {
+			var machine_retrieved = JSON.parse(d);
+			var resMachine = '';
+			for(let i = 0; i < machine_retrieved.length; i++) {
+				resMachine += '\t\t\t\t\t<tr>\n' +
+					'\t\t\t\t\t\t<td>'+machine_retrieved[i].date_entered_system+'</td>\n' +
+					'\t\t\t\t\t\t<td>'+machine_retrieved[i].car_code+'</td>\n' +
+					'\t\t\t\t\t\t<td>'+machine_retrieved[i].serial_number+'</td>\n' +
+					'\t\t\t\t\t\t<td>'+machine_retrieved[i].price+'</td>\n' +
+					'\t\t\t\t\t\t<td>'+machine_retrieved[i].description+'</td>\n' +
+					'\t\t\t\t\t</tr>\n';
+			}
+
+			$("#info-machine-table").append(getMachineTableTemplate(resMachine));
+		},
+		complete: function () {
+			n_loader = 1;
+			$("#info-machine-modal").modal();
+		}
+	});
+
+
+});
+
+
+// end info machine section //
+
+
 $(document).on('click', '.edit-client', function () {
 	let client_id_edit = $(this).attr('name');
 	$("#modify-clients-modal").modal("hide");
@@ -399,6 +439,21 @@ $(document).on('click', '#modify-client', function () {
 
 });
 
+
+function getMachineTableTemplate(data) {
+	return '\t<thead>\n' +
+		'\t\t\t\t\t<tr>\n' +
+		'\t\t\t\t\t\t<th scope="col">Date Entered</th>\n' +
+		'\t\t\t\t\t\t<th scope="col">Machine Code</th>\n' +
+		'\t\t\t\t\t\t<th scope="col">Serial Number</th>\n' +
+		'\t\t\t\t\t\t<th scope="col">Price</th>\n' +
+		'\t\t\t\t\t\t<th scope="col">Description</th>\n' +
+		'\t\t\t\t\t</tr>\n' +
+		'\t\t\t\t\t</thead>\n' +
+		'\t\t\t\t\t<tbody>\n' +
+		data+
+		'\t\t\t\t\t</tbody>';
+}
 
 function getTableTemplate(data) {
 	return '\t<thead>\n' +
