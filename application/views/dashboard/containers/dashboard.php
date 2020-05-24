@@ -68,7 +68,8 @@
 </div>
 
 <div class="w-50 mx-auto mt-5 mb-5 avail-machines-bck">
-	<h1 class="p-5 text-white text-center">AVAILABLE MACHINES</h1>
+	<h1 class="pt-5 text-white text-center">AVAILABLE MACHINES</h1>
+	<h4 class="pb-5 text-white text-center">(Hover over for actions)</h4>
 </div>
 
 <div id="machine-grid" class="row mx-auto">
