@@ -41,6 +41,113 @@ function getItemTemplate(quantity_avail,picture_path,id) {
 		'\t</div>';
 }
 
+// edit machine ---
+$(document).on('click', '.edit_machine', function () {
+	var machine_id = $(this).attr('name');
+	$("#edit-machine-form").trigger("reset");
+	$("#edit-machine-id-span").empty();
+	$.ajax({
+		url: domain + "ajax/dashboard/editMachine/" + machine_id,
+		type: 'post',
+		beforeSend: function () {
+			n_loader = -1;
+		},
+		success: function (d) {
+			var edit_machine = null;
+			try {
+				edit_machine = JSON.parse(d);
+				appendEditMachineData(edit_machine);
+
+			}catch(e) {
+				//TODO: Some logger solution
+
+			}
+		},
+		complete: function () {
+			n_loader = 1;
+			$("#edit-machine-id-span").append(machine_id);
+			$("#edit-machine-modal").modal();
+		}
+	});
+
+});
+
+$("#edit-machine-form").submit(function (e) {
+	e.preventDefault();
+	var form = $('#edit-machine-form')[0];
+	var formData = new FormData(form);
+	formData.append("id", $("#edit-machine-id-span").text());
+	var file = $('#picture_edit_machine')[0].files[0];
+	$flag = true;
+	if (file !== undefined) {
+		var maxSizeMb = 2;
+		var totalSize = file.size;
+		var totalSizeMb = totalSize / Math.pow(1024, 2);
+		if (totalSizeMb > maxSizeMb) {
+			var errorMsg = 'File too large. Maximum file size is ' + maxSizeMb + 'MB. Selected file is ' + totalSizeMb.toFixed(2) + 'MB';
+			$flag = false;
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: errorMsg
+			})
+		}
+	}
+
+	if ($flag) {
+		$.ajax({
+			type: "POST",
+			url: domain + 'ajax/dashboard/editMachineData',
+			data: formData,
+			contentType: false,
+			processData: false,
+			beforeSend: function () {
+				n_loader = -1;
+			},
+			success: function (data) {
+				var j_data = JSON.parse(data);
+				n_loader = 1;
+				if(j_data[0].picture_path.includes("utility")) {
+					var last_added_item = getItemTemplate( j_data[0].quantity_avail,j_data[0].picture_path,  j_data[0].id);
+					var machine_id = $("#edit-machine-id-span").text();
+					$('#'+machine_id).remove();
+					$("#machine-grid").append(last_added_item);
+					Swal.fire({
+						icon: 'success',
+						title: 'Your machine has been edited.',
+						showConfirmButton: false,
+						timer: 3000
+					});
+					$("#edit-machine-modal").modal("hide");
+				} else {
+					Swal.fire({
+						icon: 'error',
+						title: j_data[0],
+						showConfirmButton: false,
+						timer: 3000
+					});
+				}
+
+
+			},
+			complete: function() {
+				n_loader = 1;
+			}
+		})
+	}
+});
+
+
+function appendEditMachineData(data) {
+	$("#machine_code_edit_machine").val(data[0].car_code);
+	$("#serial_number_edit_machine").val(data[0].serial_number);
+	$("#price_edit_machine").val(data[0].price);
+	$("#quantity_edit_machine").val(data[0].quantity_avail);
+	$("#description_edit_machine").val(data[0].description);
+}
+// end of edit machine ---
+
+
 // deactivate machine section --
 
 $(document).on('click', '.deactivate_machine', function () {
@@ -122,7 +229,7 @@ $(document).on('click', '.edit-client', function () {
 	let client_id_edit = $(this).attr('name');
 	$("#modify-clients-modal").modal("hide");
 	$("#company-id-for-edit").empty();
-	$("#new_company_name_add_client").val('');;
+	$("#new_company_name_add_client").val('');
 	$("#company-id-for-edit").append(client_id_edit);
 	$("#edit-client-modal").modal();
 

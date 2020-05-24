@@ -194,4 +194,52 @@
 	</div>
 </div>
 
+<div class="modal" id="edit-machine-modal" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Edit Machine - <span id="edit-machine-id-span"></span></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p>You can modify what you need.</p>
+				<form id="edit-machine-form" method="POST"  enctype="multipart/form-data">
+					<div class="form-group">
+						<label for="machine_code_edit_machine">Machine Code</label>
+						<input id="machine_code_edit_machine" name="machine_code_edit_machine" class="form-control" type="text" >
+					</div>
+					<div class="form-group">
+						<label for="serial_number_edit_machine">Serial Number</label>
+						<input type="text" name="serial_number_edit_machine" class="form-control dontClear" id="serial_number_edit_machine" >
+					</div>
+					<div class="form-group">
+						<label for="price_edit_machine">Price</label>
+						<input type="number" name="price_edit_machine" class="form-control" id="price_edit_machine">
+					</div>
+					<div class="form-group">
+						<label for="quantity_edit_machine">Quantity</label>
+						<input type="number" name="quantity_edit_machine" class="form-control" id="quantity_edit_machine">
+					</div>
+					<div class="form-group">
+						<label for="picture_edit_machine">Picture </label>
+						<input type="file" class="form-control-file" name="picture_edit_machine" id="picture_edit_machine">
+					</div>
+					<div class="form-group">
+						<label for="description_edit_machine">Description</label>
+						<textarea class="form-control" name="description_edit_machine" id="description_edit_machine"
+								  rows="4" ></textarea>
+					</div>
+
+					<div style="float: right !important;" id="buttons_edit_machine">
+						<button type="submit" id="submit_edit_machine" class="btn btn-primary">Submit</button>
+						<button type="reset" id="clear_edit_machine" class="btn btn-secondary">Clear</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
 

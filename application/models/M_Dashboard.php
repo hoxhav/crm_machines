@@ -4,6 +4,10 @@ class M_Dashboard extends MY_Model {
 		return $this->getQueryResultArray("call sp_add_machine('$car_code', '$serial_number', '$price', '$picture', '$quantity', '$description')");
 	}
 
+	public function editMachineData($id,$car_code, $serial_number, $price, $picture, $quantity, $description) {
+		return $this->getQueryResultArray("call sp_edit_machine('$id','$car_code', '$serial_number', '$price', '$description','$quantity','$picture')");
+	}
+
 	public function getAvailMachines() {
 		return $this->getQueryResultArray("call sp_get_avilable_machines()");
 	}
@@ -26,6 +30,10 @@ class M_Dashboard extends MY_Model {
 	public function editClient($client_id, $company_name) {
 		$this->db->query("call sp_edit_client('$client_id', '$company_name')");
 		return "success";
+	}
+
+	public function editMachineForSelection($machine_id) {
+		return $this->getQueryResultArray("call sp_get_machine_for_edit('$machine_id')");
 	}
 }
 
