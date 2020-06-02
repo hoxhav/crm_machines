@@ -32,7 +32,7 @@ function getItemTemplate(quantity_avail,picture_path,id) {
 	return '\t<div id="'+id+'" class="col-lg-3 mt-4">\n' +
 		'\t\t<div class="card text-center text-white machine-items">\n' +
 		'\t\t\t<div class="card-header">\n' +
-		'\t\t\t\t<h5 class="card-title">Available quantity - ' + quantity_avail+'</h5>\n' +
+		'\t\t\t\t<h5 class="card-title">Available quantity - <span id="quantity_avail_item">' + quantity_avail+'</span></h5>\n' +
 		'\t\t\t\t\t\t\t<button name="' + id+'" class="btn btn-info info_machine">Info</button>\n' +
 		'\t\t\t</div>\n' +
 		'\t\t\t<div class="card-body pb-4">\n' +
@@ -242,6 +242,7 @@ $(document).on('click', '.sell_machine', function () {
 	let machine_id_sell = $(this).attr('name');
 	$("#serial-num-sell-machine").text('');
 	$("#id-sell-machine-span").text('');
+	$("#client_sell_machine").find('option').not(':first').remove();
 	$.ajax({
 		url: domain + "ajax/dashboard/sellMachineAppendData/" + machine_id_sell,
 		type: 'post',
@@ -266,6 +267,7 @@ $(document).on('click', '.sell_machine', function () {
 		},
 		complete: function () {
 			n_loader = 1;
+			$("#sell-machine-form").trigger("reset");
 			$("#sell-machine-modal").modal();
 		}
 	});
@@ -306,8 +308,17 @@ $("#sell-machine-form").submit(function (e) {
 			}
 		},
 		complete: function () {
+			$("#sell-machine-form").trigger("reset");
 			n_loader = 1;
-			window.location = domain;
+			let parent = $("#id-sell-machine-span").text();
+			let availQua = $("#" +parent + " #quantity_avail_item").text();
+			$("#" +parent + "  #quantity_avail_item").text(availQua-1);
+			if($("#" +parent + " #quantity_avail_item").text() == 0) {
+				$("#sell-machine-modal").modal("hide");
+				$('#'+parent).remove();
+
+			}
+			//window.location = domain;
 		}
 	});
 
